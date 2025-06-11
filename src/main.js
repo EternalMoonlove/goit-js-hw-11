@@ -1,14 +1,17 @@
-/*
-У файлі main.js напиши всю логіку роботи додатка. Виклики нотифікацій iziToast, усі перевірки на довжину масиву в отриманій відповіді робимо саме в цьому файлі. Імпортуй в нього функції із файлів pixabay-api.js та render-functions.js та викликай їх у відповідний момент.
-*/
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 import { getImagesByQuery } from './js/pixabay-api.js';
 
+import {
+  clearGallery,
+  createGallery,
+  showLoader,
+  hideLoader,
+} from './js/render-functions.js';
+
 const formEl = document.querySelector('.js-form');
 const inputEl = document.querySelector('input[name="search-text"]');
-const listEl = document.querySelector('.js-gallery');
 
 formEl.addEventListener('submit', async event => {
   event.preventDefault();
@@ -24,6 +27,9 @@ formEl.addEventListener('submit', async event => {
     return;
   }
 
+  clearGallery();
+  showLoader();
+
   try {
     const responseData = await getImagesByQuery(inputValue);
 
@@ -38,7 +44,7 @@ formEl.addEventListener('submit', async event => {
         titleColor: '#fff',
       });
     } else {
-      console.log('Знайдено зображення:', responseData.hits);
+      createGallery(responseData.hits);
     }
   } catch (error) {
     iziToast.error({
@@ -48,6 +54,7 @@ formEl.addEventListener('submit', async event => {
     });
     console.error('Помилка під час пошуку зображень:', error);
   } finally {
+    hideLoader();
     inputEl.value = '';
   }
 });
