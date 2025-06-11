@@ -107,6 +107,8 @@ main:has(.back-link) {
   animation: rotate 1s linear infinite;
   display: none;
   margin: 20px auto;
+  display: inline-block;
+  vertical-align: middle;
 }
 .loader::before {
   content: '';
@@ -118,7 +120,7 @@ main:has(.back-link) {
   animation: prixClipFix 2s linear infinite;
 }
 .loader.is-visible {
-  display: block;
+  display: inline-block;
 }
 
 @keyframes rotate {
