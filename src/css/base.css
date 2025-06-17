@@ -99,18 +99,29 @@ main:has(.back-link) {
   flex-grow: 1;
 }
 
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: auto;
+  pointer-events: none;
+  z-index: 999;
+}
+
 .loader {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   animation: rotate 1s linear infinite;
   display: none;
-  z-index: 1000;
+  margin-top: 40px;
 }
+
 .loader::before {
   content: '';
   box-sizing: border-box;
@@ -120,6 +131,7 @@ main:has(.back-link) {
   border: 5px solid #444444;
   animation: prixClipFix 2s linear infinite;
 }
+
 .loader.is-visible {
   display: inline-block;
 }
