@@ -107,7 +107,6 @@ main:has(.back-link) {
   animation: rotate 1s linear infinite;
   display: none;
   margin: 20px auto;
-  display: inline-block;
   vertical-align: middle;
 }
 .loader::before {
